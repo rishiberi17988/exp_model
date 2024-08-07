@@ -1,0 +1,45 @@
+schema: '2.0'
+stages:
+  data_ingestion:
+    cmd: python src/exp_model/pipeline/stage_01_data_ingestion.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: fa061c8635c5802e4f20bc84257a13f6
+      size: 895
+    - path: src/exp_model/pipeline/stage_01_data_ingestion.py
+      hash: md5
+      md5: bb729e2d492d008430ded7f75ae5ab70
+      size: 892
+    outs:
+    - path: artifacts/data_ingestion/data
+      hash: md5
+      md5: 9f063e4d95807d2559a84f65b93067f1
+      size: 15865543
+  prepare_base_model:
+    cmd: python src/exp_model/pipeline/stage_02_prepare_base_model.py
+    deps:
+    - path: config/config.yaml
+      hash: md5
+      md5: fa061c8635c5802e4f20bc84257a13f6
+      size: 895
+    - path: src/exp_model/pipeline/stage_02_prepare_base_model.py
+      hash: md5
+      md5: eb3520f936f0e2ab4f07cd242c64cf69
+      size: 978
+    params:
+      params.yaml:
+        CLASSES: 7
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+        INCLUDE_TOP: false
+        LEARNING_RATE: 0.01
+        WEIGHTS: imagenet
+    outs:
+    - path: artifacts/prepare_base_model
+      hash: md5
+      md5: ab29ba1dd54339e41e0605044385fecf.dir
+      size: 118575224
+      nfiles: 2
